@@ -3,7 +3,8 @@ from wtforms import StringField, PasswordField, TextAreaField
 from wtforms.validators import InputRequired, Email, Length
 
 
-class UserForm(FlaskForm):
+class UserRegisterForm(FlaskForm):
+    """form for when user first register"""
     username   = StringField("Username",   
                             validators=[
                                 InputRequired(message="username cannot be blank"),
@@ -30,7 +31,18 @@ class UserForm(FlaskForm):
                                 Length(max=30, message="last name cannot be over 30 chrs long")
                                 ]
                             )# 30
+class UserLoginForm(FlaskForm):
+    """form for when user logs in"""
 
+    username   = StringField("Username",   
+                            validators=[
+                                InputRequired(message="username cannot be blank"),
+                                Length(max=20, message="Username cannot be over 20 chrs long")
+                                ]
+                            ) #20
+    
+    password   = PasswordField("Password", 
+                            validators=[InputRequired(message="password cannot be blank")])
 
 class FeedbackForm(FlaskForm):
     text = TextAreaField("Feedback Text",

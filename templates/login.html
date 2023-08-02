@@ -1,0 +1,45 @@
+{#
+  <!-- 
+    Could of instead implemented a seperate template for a form and included
+    that form here for when user is registering and loging in since we dont need 
+    the email for this application. 
+  -->
+  { % extends 'base.html' % }
+  { % block content % }
+      { % if task == 'content1' % }
+          { % include 'content1.html' % }
+      { % endif % }
+      { % if task == 'content2' % }
+          { % include 'content2.html' % }
+      { % endif % }
+  { % endblock % }
+  
+#}
+
+{% extends 'base.html'  %}
+
+{% block content %}
+
+<h1 class="display-1">Login</h1>
+<p class="lead">Login Below. Don't have an account? <a href="/register">Register here</a></p>
+
+<form method="POST">
+
+  {{ form.hidden_tag() }}
+
+  {% for field in form
+    if field.widget.input_type != 'hidden' %}
+  <p>
+    {{ field.label }}
+    {{ field(class_="form-control") }}
+
+    {% for error in field.errors %}
+    <span class="form-text text-danger">{{ error }}</span>
+    {% endfor %}
+  </p>
+  {% endfor %}
+
+  <button class="btn btn-success" type="submit">Login</button>
+
+</form>
+{% endblock %}
