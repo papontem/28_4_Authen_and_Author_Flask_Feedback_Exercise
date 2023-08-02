@@ -23,7 +23,6 @@ db.create_all()
 
 
 ##PART 3: MAKE ROUTES 
-
 ##GET /
 @app.route('/')
 def home_page():
@@ -82,23 +81,6 @@ def register_form_submit():
     return render_template("register.html", form=form)
 
 
-## GET /secret
-@app.route("/secret")
-def secret():
-    """Example hidden page for logged-in users only."""
-
-    if "user_username" not in session:
-        flash("You must be logged in to view!")
-        return redirect("/")
-
-        # alternatively, can return HTTP Unauthorized status:
-        #
-        # from werkzeug.exceptions import Unauthorized
-        # raise Unauthorized()
-
-    else:
-        return render_template("secret.html")
-
 
 ## GET AND POST /login
 # GET /login 
@@ -140,4 +122,38 @@ def login_form_submit():
             form.username.errors = ["Bad name/password"]
 
     return render_template("login.html", form=form)
+
+# Part 4
+## GET /secret
+@app.route("/secret")
+def secret():
+    """
+        Hidden page for logged-in users only.
+        Dont let everyone go to /secret
+    """
+
+    if "user_username" not in session:
+        flash("You must be logged in to view!")
+        return redirect("/")
+
+        # alternatively, can return HTTP Unauthorized status:
+        #
+        # from werkzeug.exceptions import Unauthorized
+        # raise Unauthorized()
+
+    else:
+        return render_template("secret.html")
+
+
+# Part 5: Log out users
+# Make routes for the following:
+##GET /logout
+@app.route("/logout")
+def logout():
+    """
+        Clear any information from the session and redirect to /
+    """
+    session.pop("user_username")
+    flash("Goodbye!", "success")
+    return redirect("/")
 
