@@ -1,9 +1,4 @@
-/* body {
-	padding: 0;
-	margin: 0;
-	color: black;
-	background-color: bisque;
-}
+/*
 .navbar {
 	display: flexbox;
 	justify-content: center;
@@ -29,21 +24,8 @@ main#content {
 	margin: 20px;
 	background-color: rgba(255, 255, 255, 0.95);
 }
+*/
 
-.messages li p {
-	padding: 1rem;
-	font-size: 1.5rem;
-	border-radius: 10px;
-	box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-}
-.messages .error p {
-	border: solid 2px red;
-	background-color: rgba(252, 124, 145, 0.5);
-}
-.messages .success p {
-	border: solid 2px green;
-	background-color: rgba(144, 255, 144, 0.5);
-} */
 
 /* specific styles */
 
@@ -51,3 +33,40 @@ main#content {
 /* body{
 	background-image: url(imgs/..........);
 } */
+:root{
+	--my-bk-color1: white;
+	--my-bk-color1-9: rgba(255, 255, 255, 0.9);
+	--my-bk-color2: rgb(211, 211, 211);
+	--my-bk-color2-75: rgba(211, 211, 211, 0.75);
+	--my-bk-color3: rgb(220, 165, 49);
+	--my-bk-color4: rgb(180, 100, 45);
+	--my-bk-color5: rgb(80, 30, 12);
+	--my-bk-color6: rgb(40, 15, 6);
+	--my-bk-color7: rgb(20, 5, 3);
+	--my-bk-color8: rgb(255, 215, 0);
+	--my-bk-color9: rgb(139, 0, 0);
+	--my-bk-color10: rgb(0, 0, 0);
+}
+body {
+	padding: 200;
+	margin: 0;
+	color: black;
+	background-color: bisque;
+}
+
+ol.messages li p {
+	padding: 0.9rem;
+	font-size: 1.4rem;
+	border-radius: 10px;
+	box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+}
+
+.messages .alert-danger p {
+	border: solid 2px red;
+	background-color: rgba(252, 124, 145, 0.5);
+}
+
+.messages .alert-success p {
+	border: solid 2px green;
+	background-color: rgba(144, 255, 144, 0.5);
+} 
