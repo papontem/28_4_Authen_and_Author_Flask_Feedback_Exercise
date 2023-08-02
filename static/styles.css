@@ -1,0 +1,53 @@
+/* body {
+	padding: 0;
+	margin: 0;
+	color: black;
+	background-color: bisque;
+}
+.navbar {
+	display: flexbox;
+	justify-content: center;
+	flex-flow: column;
+	align-content: center;
+	background-color: black;
+	padding: 10px;
+}
+.navbar a {
+	margin: 2px;
+	color: white;
+	text-decoration: white wavy underline;
+}
+.navbar a:hover {
+	color: black;
+	background-color: gray;
+}
+h1 {
+	color: blueviolet;
+}
+main#content {
+	padding: 5px;
+	margin: 20px;
+	background-color: rgba(255, 255, 255, 0.95);
+}
+
+.messages li p {
+	padding: 1rem;
+	font-size: 1.5rem;
+	border-radius: 10px;
+	box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+}
+.messages .error p {
+	border: solid 2px red;
+	background-color: rgba(252, 124, 145, 0.5);
+}
+.messages .success p {
+	border: solid 2px green;
+	background-color: rgba(144, 255, 144, 0.5);
+} */
+
+/* specific styles */
+
+/* WALLPAPER? */
+/* body{
+	background-image: url(imgs/..........);
+} */
