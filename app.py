@@ -26,7 +26,8 @@ db.create_all()
 def home_page():
     """ Get app homepage """
 
-    flash("HELOOOOO","danger")
-    flash("HELOOOOO","success")
+    # flash("HELOOOOO","danger")
+    # flash("HELOOOOO","success")
+
     return render_template('home.html')
 

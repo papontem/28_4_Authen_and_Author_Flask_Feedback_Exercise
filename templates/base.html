@@ -14,14 +14,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css">
 
 	</head>
+	<!-- ANY STYLE TO OVERWRITE -->
 	<!-- <style>
-		.alert {
-			position: relative;
-			padding: .75rem 1.25rem 0.75rem 1.25rem;
-			margin-bottom: 0rem;
-			border: 1px solid transparent;
-			border-radius: .25rem;
-		}
 	</style> -->
 	<body>
 		<!-- TOP NAV BAR -->
@@ -48,30 +42,33 @@
 				</ul>
 			</div>
 		</nav>
+		<!-- LINE TO SEPERATE nav And Messages -->
 		<hr />
-		<main id="content">
-			{% with messages = get_flashed_messages(with_categories=true) %}
-			<!-- check if messages exist -->
-				{% if messages %}
-			<div class="messages_container" style="margin-top: 2em">
-				<ol class="messages">
-					{% for category,msg in messages %}
-					<li class="alert alert-{{category}}"><p>{{ msg }}</p></li>
-					{% endfor %}
-				</ol>
-			</div>
-				{% endif %} 
-			{% endwith %}
-			<h1>28.4 Authen and Author Flask Feedback Exercise</h1>
-			{% block content %}BODY CONTENT GOES HERE{% endblock %}
-			<!--line to seperate main body and footer -->
-			<hr />
-			<footer>
-				<section class="Footer_Content">
-					<p>&copy; Phedias A.M. All Rights Reserved</p>
-				</section>
-			</footer>
+		{% with messages = get_flashed_messages(with_categories=true) %}
+		<!-- check if messages exist -->
+			{% if messages %}
+		<div class="messages_container" style="margin-top: 2em">
+			<ol class="messages">
+				{% for category,msg in messages %}
+				<li class="alert alert-{{category}}"><p>{{ msg }}</p></li>
+				{% endfor %}
+			</ol>
+		</div>
+			{% endif %} 
+		{% endwith %}
+
+		<main id="main_content_container">
+			<h1 class="text-center text-wrap">28.4 Authentication and Authorization Flask Feedback Exercise</h1>
+			<section id="main_content"></section>{% block content %}BODY CONTENT GOES HERE{% endblock %}
 		</main>
+
+		<!--line to seperate main body and footer -->
+		<hr />
+		<footer>
+			<section class="Footer_Content">
+				<p>&copy; Phedias A.M. All Rights Reserved</p>
+			</section>
+		</footer>
 
 		<!-- AXIOS -->
 		<script 
