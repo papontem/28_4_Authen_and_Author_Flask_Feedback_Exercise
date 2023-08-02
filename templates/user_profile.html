@@ -1,0 +1,39 @@
+{% extends 'base.html'  %}
+
+{% block content %}
+<!-- HTML BODY TAG CONTENT OF WEBPAGE -->
+
+<!-- User Profile Content -->
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4">
+            <!-- User Profile Card -->
+            <div class="card">
+                <!-- image implementation in the future -->
+                <img src="https://via.placeholder.com/150" class="card-img-top" alt="User Profile Picture Could Not Be Loaded">
+                <div class="card-body">
+                    <h5 class="card-title">{{user.first_name}} {{user.last_name}} <i class="fa-regular fa-user"></i></h5>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <!-- User Details -->
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">User Details:</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item">Username:{{user.username}} </li>
+                        <li class="list-group-item">Email:{{user.email}}</li>
+                        <li class="list-group-item">First Name:{{user.first_name}}</li>
+                        <li class="list-group-item">Last Name:{{user.last_name}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- User feedback -->
+
+  
+{% endblock %}

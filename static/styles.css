@@ -51,7 +51,7 @@ ol.messages li p {
 .navbar a {
 	margin: 2px;
 	color: white;
-	text-decoration: white wavy underline;
+	text-decoration: white solid underline;
 }
 .navbar a:hover {
 	color: black;

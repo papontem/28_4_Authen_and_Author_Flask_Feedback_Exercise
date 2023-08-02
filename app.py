@@ -47,7 +47,7 @@ def show_register_form():
 @app.route('/register', methods=["POST"])
 def register_form_submit():
     """
-    Process the registration form by adding a new user. Then redirect to /secret
+    Process the registration form by adding a new user. Then redirect to /users/<username>
     """
     form = UserRegisterForm()
 
@@ -72,8 +72,8 @@ def register_form_submit():
         # user added put username in session to keep them logged in.
         session['user_username'] = new_user.username
         flash('Welcome! Successfully Created Your Account!', "success")
-
-        return redirect('/secret')
+        # take user to their new profile page
+        return redirect(f"/users/{new_user.username}")
     else:
         # handle form validation errors
         flash("Invalid input data. Please check your form.", "warning")
@@ -101,7 +101,7 @@ def show_login_form():
 def login_form_submit():
     """
         handle login form submission.
-        Process the login form, ensuring the user is authenticated and going to /secret if so.
+        Process the login form, ensuring the user is authenticated and going to /users/<username> if so.
     """
 
     form = UserLoginForm()
@@ -116,7 +116,8 @@ def login_form_submit():
         if user:
             # keep logged in
             session["user_username"] = user.username 
-            return redirect("/secret")
+            # take user to their profile page
+            return redirect(f"/users/{user.username}")
 
         else:
             form.username.errors = ["Bad name/password"]
@@ -124,16 +125,22 @@ def login_form_submit():
     return render_template("login.html", form=form)
 
 # Part 4
-## GET /secret
-@app.route("/secret")
-def secret():
+# Part 6: changed /secret to /users/<username>
+# Now that we have some logging in and and logging out working. Let’s add some authorization! When a user logs in, take them to the following route.
+## GET /users/<username>
+@app.route("/users/<username>")
+def show_user_profile(username):
     """
         Hidden page for logged-in users only.
-        Dont let everyone go to /secret
-    """
+        Dont let everyone go to /users/<username>
 
+        Display a template the shows information about that user (everything except for their password)
+        You should ensure that only logged in users can access this page.
+    """
+    
     if "user_username" not in session:
-        flash("You must be logged in to view!")
+
+        flash("You must be logged in to view!", "danger")
         return redirect("/")
 
         # alternatively, can return HTTP Unauthorized status:
@@ -142,7 +149,10 @@ def secret():
         # raise Unauthorized()
 
     else:
-        return render_template("secret.html")
+
+        user = User.query.get_or_404(username)
+        
+        return render_template("user_profile.html", user=user)
 
 
 # Part 5: Log out users
@@ -156,4 +166,5 @@ def logout():
     session.pop("user_username")
     flash("Goodbye!", "success")
     return redirect("/")
+
 
