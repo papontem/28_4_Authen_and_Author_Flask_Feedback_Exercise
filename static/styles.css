@@ -11,16 +11,20 @@
 	--my-bk-color8: rgb(255, 215, 0);
 	--my-bk-color9: rgb(139, 0, 0);
 	--my-bk-color10: rgb(0, 0, 0);
+	--my-bk-color11: hwb(200 0% 0%);
 }
 body {
 	padding: 200;
 	margin: 0;
 	color: black;
-	background-color: bisque;
 }
 #main_content_container{
 	width: 80%;
-	margin: auto;
+	margin: auto auto 100px auto;
+	border-radius: 20px;
+	padding-bottom: 50px !important;
+	background-color: bisque;
+
 }
 
 ol.messages li p {
@@ -70,6 +74,16 @@ main#content {
 /* specific styles */
 button{
 	margin: 10px !important;
+	
+}
+.user_feedback_add_button{
+	color: white !important;
+	background-color: var(--my-bk-color11) !important;
+}
+.delete_user_form{
+	margin: 0 !important;
+	padding: 0 !important;
+
 }
 /* WALLPAPER? */
 /* body{

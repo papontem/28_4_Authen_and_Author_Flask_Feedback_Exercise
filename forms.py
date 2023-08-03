@@ -45,5 +45,10 @@ class UserLoginForm(FlaskForm):
                             validators=[InputRequired(message="password cannot be blank")])
 
 class FeedbackForm(FlaskForm):
-    text = TextAreaField("Feedback Text",
+    title = StringField("Feedback Title",
+                       validators=[InputRequired(message="Title cannot be blank"),
+                                Length(max=100, message="Title cannot be over 100 chrs long")
+                                ]
+                            )# 100
+    content = TextAreaField("Feedback Text",
                        validators=[InputRequired(message="Feedback cannot be blank")])

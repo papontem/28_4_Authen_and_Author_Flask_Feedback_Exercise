@@ -1,5 +1,5 @@
 {% extends 'base.html'  %}
-
+{% block title%}{{user.username}}'s Profile{% endblock%}
 {% block content %}
 <!-- HTML BODY TAG CONTENT OF WEBPAGE -->
 
@@ -13,7 +13,10 @@
                 <img src="https://via.placeholder.com/150" class="card-img-top" alt="User Profile Picture Could Not Be Loaded">
                 <div class="card-body">
                     <h5 class="card-title">{{user.first_name}} {{user.last_name}} <i class="fa-regular fa-user"></i></h5>
-                    
+                    <!-- Button to delete the user -->
+                    <form action="/users/{{user.username}}/delete" method="post" class="delete_user_form">
+                        <button type="submit" class="btn btn-danger">Delete User</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -23,17 +26,49 @@
                 <div class="card-body">
                     <h5 class="card-title">User Details:</h5>
                     <ul class="list-group">
-                        <li class="list-group-item">Username:{{user.username}} </li>
-                        <li class="list-group-item">Email:{{user.email}}</li>
-                        <li class="list-group-item">First Name:{{user.first_name}}</li>
-                        <li class="list-group-item">Last Name:{{user.last_name}}</li>
+                        <li class="list-group-item">Username: {{user.username}} </li>
+                        <li class="list-group-item">Email: {{user.email}}</li>
+                        <li class="list-group-item">First Name: {{user.first_name}}</li>
+                        <li class="list-group-item">Last Name: {{user.last_name}}</li>
+                        
+                        
                     </ul>
                 </div>
             </div>
         </div>
     </div>
+    <!-- User feedback -->
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <!-- Add link to go and show add more feedback form -->
+            <h4>Feedback List: <a href="/users/{{user.username}}/feedback/add" class="btn user_feedback_add_button">Add Feedback</a></h4>
+            
+            {% if user.feedbacks %}
+                <ul class="list-group">
+                    {% for feedback in user.feedbacks %}
+                        <li class="list-group-item">
+                            <h5>{{ feedback.title }}</h5>
+                            <p>
+                                <form style="display:inline;" action="/feedback/{{feedback.id}}/update" method="POST">
+                                    <button class="btn btn-sm btn-danger">Edit feedback<i class="fa-solid fa-pen-to-square"></i></button>
+                                </form>
+                                <form style="display:inline;" action="/feedback/{{feedback.id}}/delete" method="POST">
+                                    <button class="btn btn-sm btn-danger">Delete feedback<i class="fas fa-trash"></i></button>
+                                </form>
+                            </p>
+                            <p>{{ feedback.content }}</p>
+
+                        </li>
+                    {% endfor %}
+                    
+                </ul>
+            {% else %}
+                <p>No feedbacks available.</p>
+            {% endif %}
+        </div>
+    </div>
+
 </div>
-<!-- User feedback -->
 
   
 {% endblock %}
