@@ -249,8 +249,61 @@ def feedback_form_submit(username):
         # handle form validation errors
         flash("Invalid input data. Please check your form.", "warning")
         return render_template("add_feedback.html", form=form, user=user)
-        
-        
+
+## Part 8: Make/Modify Routes For Users and Feedback
+## GET /feedback/<int:feedback-id>/update
+app.route("/feedback/<int:feedback_id>/update", methods=["GET"])
+def show_update_feedback_form(feedback_id):
+    """
+        Display a form to edit feedback 
+        **Make sure that only the user who has written that feedback can see this form **
+    """
+
+    if "user_username" not in session:
+        flash("You must be logged in to edit feedback!", "danger")
+        return redirect("/")
+
+        # alternatively, can return HTTP Unauthorized status:
+        # from werkzeug.exceptions import Unauthorized; raise Unauthorized()
+
+    # MAKING SURE RIGHT USER IS IN THE RIGHT FORM
+    # print("****************************************************************************")
+    feedback = Feedback.query.get_or_404(feedback_id)
+    # print("feedback=", feedback)
+    # print("feedback.user=", feedback.user)
+    # print("feedback.username=", feedback.username)
+    # print("****************************************************************************")
+    user = User.query.get_or_404(feedback.username)
+    # print("user=", user)
+    # print("user.feedbacks=", user.feedbacks)
+    # print("****************************************************************************")
+
+    if feedback.username != session["user_username"]:
+        flash("You are not allowed there! Acces Denied!", "danger")
+        return redirect("/")
+
+        # alternatively, can return HTTP Unauthorized status:
+        # from werkzeug.exceptions import Unauthorized; raise Unauthorized()
+    else:
+        form = FeedbackForm(obj=feedback)
+        return render_template("edit_feedback.html", form=form, user=user)
+    
+
+
+## POST /feedback/<int:feedback-id>/update
+# app.route("/feedback/<int:feedback_id>/update", methods=["POST"])
+# def update_feedback_form_submit(feedback_id):
+#     """
+#         Update a specific piece of feedback and redirect to /users/<username>
+#         Make sure that only the user who has written that feedback can update it
+#     """
+
+#     feedback = Feedback.query.get_or_404(feedback_id)
+#     form = FeedbackForm(obj=feedback)
+#     return redirect(f"/users/{feedback.username}")
+
+# POST /feedback/<int:feedback-id>/delete
+    # Delete a specific piece of feedback and redirect to /users/<username> — Make sure that only the user who has written that feedback can delete it 
 
     
 
@@ -258,12 +311,3 @@ def feedback_form_submit(username):
     # Remove the user from the database and make sure to also delete all of their feedback. 
     # Clear any user information in the session and redirect to /.
     # Make sure that only the user who is logged in can successfully delete their account.
-
-# GET /feedback/<feedback-id>/update
-    # Display a form to edit feedback — **Make sure that only the user who has written that feedback can see this form **
-
-# POST /feedback/<feedback-id>/update
-    # Update a specific piece of feedback and redirect to /users/<username> — Make sure that only the user who has written that feedback can update it
-
-# POST /feedback/<feedback-id>/delete
-    # Delete a specific piece of feedback and redirect to /users/<username> — Make sure that only the user who has written that feedback can delete it 

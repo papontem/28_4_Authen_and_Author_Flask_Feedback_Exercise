@@ -42,33 +42,29 @@
         <div class="col-md-12">
             <!-- Add link to go and show add more feedback form -->
             <h4>Feedback List: <a href="/users/{{user.username}}/feedback/add" class="btn user_feedback_add_button">Add Feedback</a></h4>
-            
-            {% if user.feedbacks %}
-                <ul class="list-group">
-                    {% for feedback in user.feedbacks %}
-                        <li class="list-group-item">
-                            <h5>{{ feedback.title }}</h5>
-                            <p>
-                                <form style="display:inline;" action="/feedback/{{feedback.id}}/update" method="POST">
-                                    <button class="btn btn-sm btn-danger">Edit feedback<i class="fa-solid fa-pen-to-square"></i></button>
-                                </form>
-                                <form style="display:inline;" action="/feedback/{{feedback.id}}/delete" method="POST">
-                                    <button class="btn btn-sm btn-danger">Delete feedback<i class="fas fa-trash"></i></button>
-                                </form>
-                            </p>
-                            <p>{{ feedback.content }}</p>
 
-                        </li>
-                    {% endfor %}
-                    
-                </ul>
+            {% if user.feedbacks %}
+            <ul class="list-group">
+                {% for feedback in user.feedbacks %}
+                <li class="list-group-item">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5>{{ feedback.title }}</h5>
+                        <div>
+                            <a href="/feedback/{{feedback.id}}/update" class="btn btn-sm btn-primary ml-2">Edit <i class="fa-solid fa-pen-to-square"></i></a>
+                            <form style="display:inline;" action="/feedback/{{feedback.id}}/delete" method="POST">
+                                <button class="btn btn-sm btn-danger ml-2">Delete <i class="fas fa-trash"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                    <p>{{ feedback.content }}</p>
+                </li>
+                {% endfor %}
+
+            </ul>
             {% else %}
-                <p>No feedbacks available.</p>
+            <p>No feedbacks available.</p>
             {% endif %}
         </div>
     </div>
-
 </div>
-
-  
 {% endblock %}
