@@ -7,20 +7,20 @@
         <div class="col-md-10">
             <h1 class="display-4 text-center mb-4">Edit Feedback</h1>
 
-            <form action="/users/{{ user.username }}/feedback/add" method="POST">
+            <form method="POST">
 
                 {{ form.hidden_tag() }}
 
                 {% for field in form %}
                     {% if field.widget.input_type != 'hidden' %}
-                        <div class="form-group">
-                            {{ field.label(class='form-label') }}
-                            {{ field(class_='form-control') }}
+                <div class="form-group">
+                    {{ field.label(class='form-label') }}
+                    {{ field(class_='form-control') }}
 
-                            {% for error in field.errors %}
-                                <small class="form-text text-danger">{{ error }}</small>
-                            {% endfor %}
-                        </div>
+                    {% for error in field.errors %}
+                        <small class="form-text text-danger">{{ error }}</small>
+                    {% endfor %}
+                </div>
                     {% endif %}
                 {% endfor %}
 
